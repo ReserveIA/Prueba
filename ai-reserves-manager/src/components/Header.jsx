@@ -15,11 +15,11 @@ const Header = () => {
   }, []);
 
   const navItems = [
-    { name: 'Features', href: '#features' },
-    { name: 'How it Works', href: '#how-it-works' },
-    { name: 'Industries', href: '#industries' },
-    { name: 'Pricing', href: '#pricing' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Funciones', href: '#features' },
+    { name: 'Cómo Funciona', href: '#how-it-works' },
+    { name: 'Industrias', href: '#industries' },
+    { name: 'Precios', href: '#pricing' },
+    { name: 'Contacto', href: '#contact' },
   ];
 
   return (
@@ -46,7 +46,7 @@ const Header = () => {
             <span className={`text-xl font-bold ${
               isScrolled ? 'text-gray-900' : 'text-white'
             }`}>
-              AI ReserveManager
+              ReserveIA
             </span>
           </motion.div>
 
@@ -70,10 +70,10 @@ const Header = () => {
             <button className={`font-medium transition-colors duration-200 ${
               isScrolled ? 'text-gray-700 hover:text-primary-600' : 'text-white hover:text-primary-200'
             }`}>
-              Sign In
+              Iniciar Sesión
             </button>
             <button className="btn-primary">
-              Start Free Trial
+              Comenzar prueba
             </button>
           </div>
 

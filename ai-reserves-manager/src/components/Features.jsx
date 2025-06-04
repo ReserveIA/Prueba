@@ -18,74 +18,74 @@ const Features = () => {
   const features = [
     {
       icon: Brain,
-      title: 'AI-Powered Intelligence',
-      description: 'Machine learning algorithms that understand your business patterns and optimize booking availability automatically.',
+      title: 'Inteligencia con IA',
+      description: 'Algoritmos de aprendizaje automático que comprenden los patrones de tu negocio y optimizan la disponibilidad de reservas automáticamente.',
       color: 'from-purple-500 to-purple-600'
     },
     {
       icon: Calendar,
-      title: 'Smart Scheduling',
-      description: 'Dynamic calendar management with intelligent conflict resolution and optimal time slot recommendations.',
+      title: 'Agendamiento inteligente',
+      description: 'Gestión dinámica de calendarios con resolución automática de conflictos y recomendaciones óptimas de horarios.',
       color: 'from-blue-500 to-blue-600'
     },
     {
       icon: Users,
-      title: 'Multi-Business Support',
-      description: 'Seamlessly manage reservations across restaurants, salons, clinics, hotels, and any service-based business.',
+      title: 'Soporte multi-negocio',
+      description: 'Administra reservas en restaurantes, salones, clínicas, hoteles y cualquier negocio de servicios.',
       color: 'from-green-500 to-green-600'
     },
     {
       icon: BarChart3,
-      title: 'Real-time Analytics',
-      description: 'Comprehensive insights into booking trends, customer behavior, and business performance metrics.',
+      title: 'NO Analítica en tiempo real',
+      description: 'Información detallada sobre tendencias de reservas, comportamiento de clientes y métricas de desempeño.',
       color: 'from-orange-500 to-orange-600'
     },
     {
       icon: Globe,
-      title: 'Global Accessibility',
-      description: 'Multi-language support, timezone handling, and currency conversion for international businesses.',
+      title: 'NO Accesibilidad global',
+      description: 'Soporte multilenguaje, manejo de zonas horarias y conversión de moneda para negocios internacionales.',
       color: 'from-indigo-500 to-indigo-600'
     },
     {
       icon: Shield,
-      title: 'Enterprise Security',
-      description: 'Bank-grade encryption, GDPR compliance, and advanced security measures to protect your data.',
+      title: 'NO Seguridad empresarial',
+      description: 'Encriptación de nivel bancario, cumplimiento con GDPR y medidas avanzadas para proteger tus datos.',
       color: 'from-red-500 to-red-600'
     },
     {
       icon: Zap,
-      title: 'Lightning Fast',
-      description: 'Sub-second response times with 99.9% uptime guarantee for uninterrupted service.',
+      title: 'Ultra rápido',
+      description: 'Tiempos de respuesta menores a un segundo y garantía de 99.9% de disponibilidad.',
       color: 'from-yellow-500 to-yellow-600'
     },
     {
       icon: MessageSquare,
-      title: 'Automated Communication',
-      description: 'Smart notifications, reminders, and personalized messages to keep customers engaged.',
+      title: 'Comunicación automatizada',
+      description: 'Notificaciones inteligentes, recordatorios y mensajes personalizados para mantener a tus clientes informados.',
       color: 'from-pink-500 to-pink-600'
     },
     {
       icon: Clock,
-      title: '24/7 Availability',
-      description: 'Your AI assistant never sleeps - accept bookings and manage reservations around the clock.',
+      title: 'Disponibilidad 24/7',
+      description: 'Tu asistente de IA nunca duerme: acepta reservas y gestiona tu negocio en cualquier momento.',
       color: 'from-teal-500 to-teal-600'
     },
     {
       icon: CreditCard,
-      title: 'Payment Integration',
-      description: 'Secure payment processing with support for deposits, cancellations, and refund management.',
+      title: 'NO Integración de pagos',
+      description: 'Procesamiento de pagos seguro con soporte para anticipos, cancelaciones y reembolsos.',
       color: 'from-emerald-500 to-emerald-600'
     },
     {
       icon: Bell,
-      title: 'Smart Notifications',
-      description: 'Intelligent alert system that notifies staff and customers at the right time with relevant information.',
+      title: 'Notificaciones inteligentes',
+      description: 'Sistema de alertas que notifica a tu equipo y clientes en el momento adecuado.',
       color: 'from-violet-500 to-violet-600'
     },
     {
       icon: Smartphone,
-      title: 'Mobile Optimized',
-      description: 'Perfect experience across all devices with dedicated mobile apps for staff and customers.',
+      title: 'Optimizado para móvil',
+      description: 'Experiencia perfecta en todos los dispositivos con aplicaciones móviles dedicadas.',
       color: 'from-rose-500 to-rose-600'
     }
   ];
@@ -125,14 +125,14 @@ const Features = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Powerful Features for
+            Funciones Increíbles para
             <span className="bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">
-              {" "}Modern Businesses
+              {" "}Negocios Modernos
             </span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Everything you need to transform your reservation management into a competitive advantage.
-            Our AI-powered platform grows with your business.
+            Todo lo que necesitas para transformar la gestión de reservas en una ventaja competitiva.
+            Nuestra plataforma impulsada por IA crece con tu negocio.
           </p>
         </motion.div>
 
@@ -185,17 +185,17 @@ const Features = () => {
         >
           <div className="bg-gradient-to-r from-primary-600 to-purple-600 rounded-2xl p-8 text-white">
             <h3 className="text-2xl font-bold mb-4">
-              Ready to experience the future of reservations?
+              ¿Listo para experimentar el futuro de las reservas?
             </h3>
             <p className="text-primary-100 mb-6 max-w-2xl mx-auto">
-              Join thousands of businesses already using AI ReserveManager to streamline their operations and delight their customers.
+              Únete a miles de empresas que ya utilizan ReserveIA para optimizar sus operaciones y deleitar a sus clientes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105">
-                Start Free Trial
+                Comenzar prueba gratuita
               </button>
               <button className="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-3 px-8 rounded-lg transition-all duration-300">
-                Schedule Demo
+                Programar demostración
               </button>
             </div>
           </div>

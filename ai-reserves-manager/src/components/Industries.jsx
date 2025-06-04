@@ -14,58 +14,58 @@ const Industries = () => {
   const industries = [
     {
       icon: UtensilsCrossed,
-      title: 'Restaurants & Cafes',
-      description: 'Table management, waitlist optimization, and seamless dining experiences.',
-      features: ['Table reservations', 'Waitlist management', 'Special events', 'Group bookings'],
+      title: 'Restaurantes y Cafeterías',
+      description: 'Gestión de mesas, optimización de listas de espera y experiencias gastronómicas amenas.',
+      features: ['Reservas de mesas', 'Gestión de listas de espera', 'Eventos especiales', 'Reservas para grupos'],
       gradient: 'from-orange-500 to-red-500'
     },
     {
       icon: Scissors,
-      title: 'Salons & Spas',
-      description: 'Staff scheduling, service bookings, and customer preference tracking.',
-      features: ['Service appointments', 'Staff matching', 'Package bookings', 'Recurring visits'],
+      title: 'Salones y Spas',
+      description: 'Agendamiento de personal, reservas de servicios y seguimiento de preferencias de clientes.',
+      features: ['Citas de servicios', 'Asignación de personal', 'Reservas de paquetes', 'Visitas recurrentes'],
       gradient: 'from-pink-500 to-purple-500'
     },
     {
       icon: Stethoscope,
-      title: 'Healthcare & Clinics',
-      description: 'Patient appointments, provider schedules, and medical compliance.',
-      features: ['Patient scheduling', 'Provider availability', 'Telehealth integration', 'Insurance handling'],
+      title: 'Salud y Clínicas',
+      description: 'Citas de pacientes, horarios de profesionales y cumplimiento médico.',
+      features: ['Agendamiento de pacientes', 'Disponibilidad de profesionales', 'Integración de telemedicina', 'Gestión de seguros'],
       gradient: 'from-blue-500 to-teal-500'
     },
     {
       icon: Building2,
-      title: 'Hotels & Hospitality',
-      description: 'Room reservations, event spaces, and guest experience management.',
-      features: ['Room bookings', 'Event spaces', 'Concierge services', 'Guest preferences'],
+      title: 'Hoteles y Hospitalidad',
+      description: 'Reservas de habitaciones, espacios para eventos y gestión de la experiencia del huésped.',
+      features: ['Reservas de habitaciones', 'Espacios para eventos', 'Servicios de concierge', 'Preferencias de huéspedes'],
       gradient: 'from-indigo-500 to-blue-500'
     },
     {
       icon: Dumbbell,
-      title: 'Fitness & Wellness',
-      description: 'Class scheduling, trainer bookings, and equipment reservations.',
-      features: ['Class schedules', 'Personal training', 'Equipment booking', 'Membership management'],
+      title: 'Gimnasios y Bienestar',
+      description: 'Agendamiento de clases, reservas de entrenadores y equipos.',
+      features: ['Horarios de clases', 'Entrenamiento personal', 'Reserva de equipos', 'Gestión de membresías'],
       gradient: 'from-green-500 to-emerald-500'
     },
     {
       icon: GraduationCap,
-      title: 'Education & Training',
-      description: 'Course scheduling, tutor matching, and resource allocation.',
-      features: ['Course bookings', 'Tutor scheduling', 'Room reservations', 'Material coordination'],
+      title: 'Educación y Capacitación',
+      description: 'Programación de cursos, asignación de tutores y recursos.',
+      features: ['Reservas de cursos', 'Agendamiento de tutores', 'Reservas de aulas', 'Coordinación de materiales'],
       gradient: 'from-yellow-500 to-orange-500'
     },
     {
       icon: Car,
-      title: 'Automotive Services',
-      description: 'Service appointments, vehicle maintenance, and customer communication.',
-      features: ['Service scheduling', 'Maintenance tracking', 'Pickup/delivery', 'Parts ordering'],
+      title: 'Servicios Automotrices',
+      description: 'Citas de servicio, mantenimiento de vehículos y comunicación con clientes.',
+      features: ['Agendamiento de servicios', 'Seguimiento de mantenimiento', 'Recolección y entrega', 'Pedido de repuestos'],
       gradient: 'from-gray-600 to-gray-800'
     },
     {
       icon: Palette,
-      title: 'Creative Services',
-      description: 'Project consultations, studio time, and creative collaboration.',
-      features: ['Consultation booking', 'Studio rentals', 'Project scheduling', 'Resource sharing'],
+      title: 'Servicios Creativos',
+      description: 'Consultas de proyectos, alquiler de estudios y colaboración creativa.',
+      features: ['Reservas de consultas', 'Alquiler de estudios', 'Programación de proyectos', 'Compartir recursos'],
       gradient: 'from-purple-500 to-pink-500'
     }
   ];
@@ -82,14 +82,14 @@ const Industries = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Built for
+            Hecho para
             <span className="bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">
-              {" "}Every Industry
+              {" "}Cualquier Industria
             </span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Our AI adapts to your specific business needs, whether you're managing tables, 
-            appointments, or any type of reservation system.
+            Nuestra IA se ajusta a las necesidades únicas de tu negocio,
+            ya sea la gestión de mesas, citas o cualquier otro tipo de sistema de reservas."
           </p>
         </motion.div>
 
@@ -149,19 +149,19 @@ const Industries = () => {
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <div>
               <div className="text-3xl font-bold text-primary-600 mb-2">50+</div>
-              <div className="text-gray-600">Industry Types</div>
+              <div className="text-gray-600">Tipos de Industrias</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-primary-600 mb-2">98%</div>
-              <div className="text-gray-600">Customer Satisfaction</div>
+              <div className="text-gray-600">Satisfacción de Clientes</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-primary-600 mb-2">24/7</div>
-              <div className="text-gray-600">AI Availability</div>
+              <div className="text-gray-600">Disponibilidad IA</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-primary-600 mb-2">∞</div>
-              <div className="text-gray-600">Customization Options</div>
+              <div className="text-gray-600">Opciones de Personalización</div>
             </div>
           </div>
         </motion.div>

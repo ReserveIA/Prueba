@@ -3,10 +3,10 @@ import { ArrowRight, Play, CheckCircle, Sparkles } from 'lucide-react';
 
 const Hero = () => {
   const features = [
-    '24/7 AI-Powered Booking',
-    'Smart Availability Management',
-    'Multi-Business Integration',
-    'Real-time Analytics'
+    'Reservas 24/7 con IA',
+    'Gestión inteligente de disponibilidad',
+    'Integración para múltiples negocios',
+    'Analítica en tiempo real'
   ];
 
   return (
@@ -53,7 +53,7 @@ const Hero = () => {
               className="flex items-center space-x-2 mb-6"
             >
               <Sparkles className="w-5 h-5 text-yellow-400" />
-              <span className="text-yellow-400 font-medium">AI-Powered Reservation System</span>
+              <span className="text-yellow-400 font-medium">Sistema de reservas impulsado por IA</span>
             </motion.div>
 
             <motion.h1
@@ -62,11 +62,11 @@ const Hero = () => {
               transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1], delay: 0.1 }}
               className="text-5xl lg:text-7xl font-bold leading-tight mb-6"
             >
-              Smart
+              Reservas{' '}
               <span className="bg-gradient-to-r from-yellow-400 to-pink-400 bg-clip-text text-transparent">
-                {" "}Reservations
-              </span>
-              <br />for Every Business
+                Inteligentes
+              </span>{' '}
+              para tu negocio
             </motion.h1>
 
             <motion.p
@@ -75,8 +75,7 @@ const Hero = () => {
               transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1], delay: 0.2 }}
               className="text-xl text-gray-300 mb-8 leading-relaxed"
             >
-              Transform your reservation management with AI that understands your business. 
-              Automate bookings, optimize availability, and delight customers across any industry.
+              Transforma la gestión de tus reservas con inteligencia artificial que entiende tu empresa. Automatiza tus citas, optimiza la disponibilidad y sorprende a tus clientes en cualquier sector.
             </motion.p>
 
             {/* Features List */}
@@ -102,12 +101,12 @@ const Hero = () => {
               className="flex flex-col sm:flex-row gap-4"
             >
               <button className="btn-primary group flex items-center justify-center gap-2">
-                Start Your Free Trial
+                Comienza tu prueba gratis
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
               <button className="flex items-center space-x-2 bg-white/10 hover:bg-white/20 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 backdrop-blur-sm border border-white/20">
                 <Play className="w-5 h-5" />
-                <span>Watch Demo</span>
+                <span>Ver demo</span>
               </button>
             </motion.div>
 
@@ -120,11 +119,11 @@ const Hero = () => {
             >
               <div>
                 <div className="text-2xl font-bold text-white">10K+</div>
-                <div className="text-sm text-gray-400">Active Businesses</div>
+                <div className="text-sm text-gray-400">Negocios Activos</div>
               </div>
               <div>
                 <div className="text-2xl font-bold text-white">2M+</div>
-                <div className="text-sm text-gray-400">Reservations Managed</div>
+                <div className="text-sm text-gray-400">Reservaciones Gestionadas</div>
               </div>
               <div>
                 <div className="text-2xl font-bold text-white">99.9%</div>
@@ -144,23 +143,23 @@ const Hero = () => {
               {/* Mock Dashboard */}
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-white font-semibold">Today's Overview</h3>
+                  <h3 className="text-white font-semibold">Vista General de Hoy</h3>
                   <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
                 </div>
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-white/10 rounded-lg p-4">
                     <div className="text-2xl font-bold text-white">247</div>
-                    <div className="text-sm text-gray-300">Active Bookings</div>
+                    <div className="text-sm text-gray-300">Reservas Activas</div>
                   </div>
                   <div className="bg-white/10 rounded-lg p-4">
                     <div className="text-2xl font-bold text-white">98%</div>
-                    <div className="text-sm text-gray-300">Occupancy</div>
+                    <div className="text-sm text-gray-300">Ocupación</div>
                   </div>
                 </div>
 
                 <div className="space-y-3">
-                  <div className="text-sm text-gray-300">Recent Reservations</div>
+                  <div className="text-sm text-gray-300">Reservaciones Recientes</div>
                   {[1, 2, 3].map((item) => (
                     <motion.div
                       key={item}
@@ -173,10 +172,10 @@ const Hero = () => {
                         <span className="text-white text-sm font-semibold">{item}</span>
                       </div>
                       <div className="flex-1">
-                        <div className="text-white text-sm">Table for 4</div>
-                        <div className="text-gray-400 text-xs">7:30 PM - Restaurant</div>
+                        <div className="text-white text-sm">Mesa para 4</div>
+                        <div className="text-gray-400 text-xs">7:30 PM - Restaurante</div>
                       </div>
-                      <div className="text-green-400 text-xs">Confirmed</div>
+                      <div className="text-green-400 text-xs">Confirmada</div>
                     </motion.div>
                   ))}
                 </div>
