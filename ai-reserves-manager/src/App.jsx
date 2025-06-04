@@ -1,5 +1,6 @@
 import Header from './components/Header';
 import Hero from './components/Hero';
+import HowItWorks from './components/HowItWorks';
 import Features from './components/Features';
 import Industries from './components/Industries';
 import Pricing from './components/Pricing';
@@ -14,6 +15,7 @@ function App() {
       <div className="min-h-screen">
         <Header />
         <Hero />
+        <HowItWorks />
         <Features />
         <Industries />
         <Pricing />
