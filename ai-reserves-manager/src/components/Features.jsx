@@ -112,13 +112,13 @@ const Features = () => {
           </p>
         </motion.div>
 
-        {/* Features Grid */}
+        {/* Features Grid - Desktop */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+          className="hidden sm:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
         >
           {features.map((feature, index) => {
             const IconComponent = feature.icon;
@@ -143,6 +143,37 @@ const Features = () => {
                   {feature.title}
                 </h3>
                 
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {feature.description}
+                </p>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+        {/* Carrusel mobile */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="sm:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4"
+          style={{ WebkitOverflowScrolling: 'touch' }}
+        >
+          {features.map((feature, index) => {
+            const IconComponent = feature.icon;
+            return (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="min-w-[85vw] max-w-xs bg-white rounded-xl p-6 shadow-lg snap-center flex-shrink-0 group"
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${feature.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                  <IconComponent className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
+                  {feature.title}
+                </h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
                   {feature.description}
                 </p>

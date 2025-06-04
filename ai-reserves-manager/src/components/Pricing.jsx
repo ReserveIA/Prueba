@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion';
 import { Check, MessageSquare, Calendar, Zap, Smartphone, Bot } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import ContactForm from './ContactForm';
 
 const Pricing = () => {
   const [selectedPlan, setSelectedPlan] = useState(null);
+  const carouselRef = useRef(null);
 
   const plans = [
     {
@@ -57,6 +58,16 @@ const Pricing = () => {
     }
   ];
 
+  useEffect(() => {
+    if (window.innerWidth < 640 && carouselRef.current) {
+      // Centra el plan popular (índice 1) al cargar
+      const card = carouselRef.current.children[1];
+      if (card) {
+        card.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
+      }
+    }
+  }, []);
+
   return (
     <section id="pricing" className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -79,8 +90,8 @@ const Pricing = () => {
           </p>
         </motion.div>
 
-        {/* Pricing Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Pricing Grid Desktop */}
+        <div className="hidden sm:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {plans.map((plan, index) => {
             const IconComponent = plan.icon;
             return (
@@ -125,6 +136,63 @@ const Pricing = () => {
                     ))}
                   </ul>
 
+                  {/* CTA Button */}
+                  <button
+                    onClick={() => setSelectedPlan(plan)}
+                    className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 mt-auto ${
+                      plan.popular
+                        ? 'bg-primary-600 text-white hover:bg-primary-700'
+                        : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
+                    }`}
+                  >
+                    Comenzar ahora
+                  </button>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+        {/* Carrusel mobile */}
+        <div ref={carouselRef} className="sm:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4" style={{ WebkitOverflowScrolling: 'touch' }}>
+          {plans.map((plan, index) => {
+            const IconComponent = plan.icon;
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className={`min-w-[85vw] max-w-xs bg-white rounded-2xl shadow-xl overflow-hidden snap-center flex-shrink-0 relative ${
+                  plan.popular ? 'ring-2 ring-primary-500' : ''
+                }`}
+              >
+                {plan.popular && (
+                  <div className="absolute top-0 right-0 bg-primary-500 text-white px-4 py-1 rounded-bl-lg text-sm font-medium">
+                    Más popular
+                  </div>
+                )}
+                <div className="p-8 flex flex-col h-full">
+                  {/* Plan Header */}
+                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${plan.color} flex items-center justify-center mb-4`}>
+                    <IconComponent className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
+                  <p className="text-gray-600 mb-6">{plan.description}</p>
+                  {/* Price */}
+                  <div className="mb-6">
+                    <span className="text-4xl font-bold text-gray-900">${plan.price}</span>
+                    <span className="text-gray-600">/mes</span>
+                  </div>
+                  {/* Features */}
+                  <ul className="space-y-4 mb-8 flex-grow">
+                    {plan.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center text-gray-600">
+                        <Check className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
                   {/* CTA Button */}
                   <button
                     onClick={() => setSelectedPlan(plan)}

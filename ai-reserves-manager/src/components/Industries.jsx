@@ -93,8 +93,8 @@ const Industries = () => {
           </p>
         </motion.div>
 
-        {/* Industries Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Industries Grid - Desktop */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {industries.map((industry, index) => {
             const IconComponent = industry.icon;
             return (
@@ -114,16 +114,51 @@ const Industries = () => {
                 <div className={`w-16 h-16 rounded-lg bg-gradient-to-r ${industry.gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
                   <IconComponent className="w-8 h-8 text-white" />
                 </div>
-
                 {/* Content */}
                 <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
                   {industry.title}
                 </h3>
-                
                 <p className="text-gray-600 mb-4 leading-relaxed">
                   {industry.description}
                 </p>
-
+                {/* Features List */}
+                <ul className="space-y-2">
+                  {industry.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-center text-sm text-gray-500">
+                      <div className="w-1.5 h-1.5 bg-primary-500 rounded-full mr-2 flex-shrink-0"></div>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            );
+          })}
+        </div>
+        {/* Carrusel mobile */}
+        <div className="md:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4" style={{ WebkitOverflowScrolling: 'touch' }}>
+          {industries.map((industry, index) => {
+            const IconComponent = industry.icon;
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="min-w-[85vw] max-w-xs bg-white rounded-xl p-6 shadow-lg border border-gray-100 snap-center flex-shrink-0 group"
+                whileHover={{ scale: 1.02 }}
+              >
+                {/* Icon */}
+                <div className={`w-16 h-16 rounded-lg bg-gradient-to-r ${industry.gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                  <IconComponent className="w-8 h-8 text-white" />
+                </div>
+                {/* Content */}
+                <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
+                  {industry.title}
+                </h3>
+                <p className="text-gray-600 mb-4 leading-relaxed">
+                  {industry.description}
+                </p>
                 {/* Features List */}
                 <ul className="space-y-2">
                   {industry.features.map((feature, featureIndex) => (
