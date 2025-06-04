@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Bot, Calendar, Users, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useForm } from '../context/FormContext';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { openForm } = useForm();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,7 +74,10 @@ const Header = () => {
             }`}>
               Iniciar Sesión
             </button>
-            <button className="btn-primary">
+            <button 
+              onClick={() => openForm()}
+              className="btn-primary"
+            >
               Comenzar prueba
             </button>
           </div>
@@ -109,10 +114,16 @@ const Header = () => {
               ))}
               <div className="px-4 pt-4 border-t border-gray-200 space-y-2">
                 <button className="w-full text-left py-2 text-gray-700 hover:text-primary-600">
-                  Sign In
+                  Iniciar Sesión
                 </button>
-                <button className="w-full btn-primary">
-                  Start Free Trial
+                <button 
+                  onClick={() => {
+                    openForm();
+                    setIsMenuOpen(false);
+                  }}
+                  className="w-full btn-primary"
+                >
+                  Comenzar prueba
                 </button>
               </div>
             </div>

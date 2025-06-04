@@ -36,21 +36,9 @@ const Features = () => {
     },
     {
       icon: BarChart3,
-      title: 'NO Analítica en tiempo real',
+      title: 'Analítica en tiempo real',
       description: 'Información detallada sobre tendencias de reservas, comportamiento de clientes y métricas de desempeño.',
       color: 'from-orange-500 to-orange-600'
-    },
-    {
-      icon: Globe,
-      title: 'NO Accesibilidad global',
-      description: 'Soporte multilenguaje, manejo de zonas horarias y conversión de moneda para negocios internacionales.',
-      color: 'from-indigo-500 to-indigo-600'
-    },
-    {
-      icon: Shield,
-      title: 'NO Seguridad empresarial',
-      description: 'Encriptación de nivel bancario, cumplimiento con GDPR y medidas avanzadas para proteger tus datos.',
-      color: 'from-red-500 to-red-600'
     },
     {
       icon: Zap,
@@ -71,23 +59,11 @@ const Features = () => {
       color: 'from-teal-500 to-teal-600'
     },
     {
-      icon: CreditCard,
-      title: 'NO Integración de pagos',
-      description: 'Procesamiento de pagos seguro con soporte para anticipos, cancelaciones y reembolsos.',
-      color: 'from-emerald-500 to-emerald-600'
-    },
-    {
       icon: Bell,
       title: 'Notificaciones inteligentes',
       description: 'Sistema de alertas que notifica a tu equipo y clientes en el momento adecuado.',
       color: 'from-violet-500 to-violet-600'
     },
-    {
-      icon: Smartphone,
-      title: 'Optimizado para móvil',
-      description: 'Experiencia perfecta en todos los dispositivos con aplicaciones móviles dedicadas.',
-      color: 'from-rose-500 to-rose-600'
-    }
   ];
 
   const containerVariants = {

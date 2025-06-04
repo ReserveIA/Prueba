@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Play, CheckCircle, Sparkles } from 'lucide-react';
+import { useForm } from '../context/FormContext';
 
 const Hero = () => {
+  const { openForm } = useForm();
+  
   const features = [
     'Reservas 24/7 con IA',
     'Gestión inteligente de disponibilidad',
@@ -100,7 +103,10 @@ const Hero = () => {
               transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1], delay: 0.4 }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <button className="btn-primary group flex items-center justify-center gap-2">
+              <button 
+                onClick={() => openForm()}
+                className="btn-primary group flex items-center justify-center gap-2"
+              >
                 Comienza tu prueba gratis
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
