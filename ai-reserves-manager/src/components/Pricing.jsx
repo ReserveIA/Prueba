@@ -2,10 +2,12 @@ import { motion } from 'framer-motion';
 import { Check, MessageSquare, Calendar, Zap, Smartphone, Bot } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import ContactForm from './ContactForm';
+import { useForm } from '../context/FormContext';
 
 const Pricing = () => {
   const [selectedPlan, setSelectedPlan] = useState(null);
   const carouselRef = useRef(null);
+  const { openForm } = useForm();
 
   const plans = [
     {
@@ -138,7 +140,7 @@ const Pricing = () => {
 
                   {/* CTA Button */}
                   <button
-                    onClick={() => setSelectedPlan(plan)}
+                    onClick={() => openForm(plan)}
                     className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 mt-auto ${
                       plan.popular
                         ? 'bg-primary-600 text-white hover:bg-primary-700'
@@ -195,7 +197,7 @@ const Pricing = () => {
                   </ul>
                   {/* CTA Button */}
                   <button
-                    onClick={() => setSelectedPlan(plan)}
+                    onClick={() => openForm(plan)}
                     className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 mt-auto ${
                       plan.popular
                         ? 'bg-primary-600 text-white hover:bg-primary-700'
@@ -222,7 +224,7 @@ const Pricing = () => {
             ¿Necesitas un plan personalizado? Contáctanos para una solución a medida.
           </p>
           <button
-            onClick={() => setSelectedPlan({ name: 'Personalizado' })}
+            onClick={() => openForm({ name: 'Personalizado' })}
             className="btn-primary"
           >
             Contactar ventas
