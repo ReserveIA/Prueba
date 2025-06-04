@@ -26,7 +26,7 @@ const Hero = () => {
             repeat: Infinity,
             ease: "linear"
           }}
-          className="absolute top-1/4 -right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"
+          className="absolute top-1/4 -right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl will-change-transform"
         />
         <motion.div
           animate={{
@@ -38,7 +38,7 @@ const Hero = () => {
             repeat: Infinity,
             ease: "linear"
           }}
-          className="absolute -bottom-20 -left-10 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"
+          className="absolute -bottom-20 -left-10 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl will-change-transform"
         />
       </div>
 
@@ -47,9 +47,9 @@ const Hero = () => {
           {/* Content */}
           <div className="text-white">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
               className="flex items-center space-x-2 mb-6"
             >
               <Sparkles className="w-5 h-5 text-yellow-400" />
@@ -57,9 +57,9 @@ const Hero = () => {
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1], delay: 0.1 }}
               className="text-5xl lg:text-7xl font-bold leading-tight mb-6"
             >
               Smart
@@ -70,9 +70,9 @@ const Hero = () => {
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1], delay: 0.2 }}
               className="text-xl text-gray-300 mb-8 leading-relaxed"
             >
               Transform your reservation management with AI that understands your business. 
@@ -81,9 +81,9 @@ const Hero = () => {
 
             {/* Features List */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1], delay: 0.3 }}
               className="grid grid-cols-2 gap-4 mb-8"
             >
               {features.map((feature, index) => (
@@ -96,14 +96,14 @@ const Hero = () => {
 
             {/* CTA Buttons */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
+              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1], delay: 0.4 }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <button className="btn-primary group">
+              <button className="btn-primary group flex items-center justify-center gap-2">
                 Start Your Free Trial
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
               <button className="flex items-center space-x-2 bg-white/10 hover:bg-white/20 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 backdrop-blur-sm border border-white/20">
                 <Play className="w-5 h-5" />
@@ -113,9 +113,9 @@ const Hero = () => {
 
             {/* Stats */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1 }}
+              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1], delay: 0.5 }}
               className="flex items-center space-x-8 mt-12 pt-8 border-t border-white/20"
             >
               <div>
@@ -135,9 +135,9 @@ const Hero = () => {
 
           {/* Visual/Dashboard Preview */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1], delay: 0.2 }}
             className="relative"
           >
             <div className="relative bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/20 shadow-2xl">
@@ -164,9 +164,9 @@ const Hero = () => {
                   {[1, 2, 3].map((item) => (
                     <motion.div
                       key={item}
-                      initial={{ opacity: 0, x: -20 }}
+                      initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 1 + item * 0.1 }}
+                      transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1], delay: 0.5 + item * 0.05 }}
                       className="flex items-center space-x-3 bg-white/5 rounded-lg p-3"
                     >
                       <div className="w-8 h-8 bg-primary-500 rounded-full flex items-center justify-center">
@@ -184,9 +184,9 @@ const Hero = () => {
 
               {/* Floating Elements */}
               <motion.div
-                animate={{ y: [-10, 10, -10] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-4 -right-4 bg-yellow-400 text-yellow-900 rounded-full p-3 shadow-lg"
+                animate={{ y: [-5, 5, -5] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-4 -right-4 bg-yellow-400 text-yellow-900 rounded-full p-3 shadow-lg will-change-transform"
               >
                 <Sparkles className="w-6 h-6" />
               </motion.div>

@@ -25,39 +25,39 @@ module.exports = {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       animation: {
-        'fade-in-up': 'fade-in-up 0.3s ease-out both',
-        'fade-in-down': 'fade-in-down 0.3s ease-out both',
-        'scale-in': 'scale-in 0.25s ease-out both',
+        'fade-in-up': 'fade-in-up 0.2s cubic-bezier(0.4, 0, 0.2, 1) both',
+        'fade-in-down': 'fade-in-down 0.2s cubic-bezier(0.4, 0, 0.2, 1) both',
+        'scale-in': 'scale-in 0.15s cubic-bezier(0.4, 0, 0.2, 1) both',
       },
       keyframes: {
         'fade-in-up': {
           '0%': {
             opacity: '0',
-            transform: 'translateY(20px)',
+            transform: 'translate3d(0, 20px, 0)',
           },
           '100%': {
             opacity: '1',
-            transform: 'translateY(0)',
+            transform: 'translate3d(0, 0, 0)',
           }
         },
         'fade-in-down': {
           '0%': {
             opacity: '0',
-            transform: 'translateY(-20px)',
+            transform: 'translate3d(0, -20px, 0)',
           },
           '100%': {
             opacity: '1',
-            transform: 'translateY(0)',
+            transform: 'translate3d(0, 0, 0)',
           }
         },
         'scale-in': {
           '0%': {
             opacity: '0',
-            transform: 'scale(0.95)',
+            transform: 'scale3d(0.95, 0.95, 1)',
           },
           '100%': {
             opacity: '1',
-            transform: 'scale(1)',
+            transform: 'scale3d(1, 1, 1)',
           }
         }
       }

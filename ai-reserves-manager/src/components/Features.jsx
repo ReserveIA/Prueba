@@ -95,17 +95,21 @@ const Features = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
+        staggerChildren: 0.05,
+        duration: 0.2
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6 }
+      transition: { 
+        duration: 0.2,
+        ease: [0.4, 0, 0.2, 1]
+      }
     }
   };
 
@@ -114,10 +118,10 @@ const Features = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+          viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
@@ -147,10 +151,13 @@ const Features = () => {
                 key={index}
                 variants={itemVariants}
                 whileHover={{ 
-                  scale: 1.05,
-                  transition: { duration: 0.2 }
+                  scale: 1.02,
+                  transition: { 
+                    duration: 0.15,
+                    ease: [0.4, 0, 0.2, 1]
+                  }
                 }}
-                className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 group"
+                className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-200 group will-change-transform"
               >
                 <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${feature.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
                   <IconComponent className="w-6 h-6 text-white" />
@@ -170,10 +177,10 @@ const Features = () => {
 
         {/* Bottom CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+          viewport={{ once: true, margin: "-100px" }}
           className="text-center mt-16"
         >
           <div className="bg-gradient-to-r from-primary-600 to-purple-600 rounded-2xl p-8 text-white">
