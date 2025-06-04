@@ -18,6 +18,7 @@ export const sendEmail = async (formData) => {
     const templateParams = {
       from_name: formData.name,
       from_email: formData.email,
+      to_email: formData.email, // ← Esta línea es nueva
       company: formData.company,
       phone: formData.phone,
       plan: formData.plan || 'Prueba Gratuita',

@@ -13,6 +13,7 @@ import {
   Bell,
   Smartphone
 } from 'lucide-react';
+import { useForm } from '../context/FormContext';
 
 const Features = () => {
   const features = [
@@ -88,6 +89,8 @@ const Features = () => {
       }
     }
   };
+
+  const { openForm } = useForm();
 
   return (
     <section id="features" className="py-24 bg-gray-50">
@@ -198,10 +201,16 @@ const Features = () => {
               Únete a miles de empresas que ya utilizan ReserveIA para optimizar sus operaciones y deleitar a sus clientes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105">
+              <button
+                className="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105"
+                onClick={() => openForm({ name: 'Prueba Gratuita' })}
+              >
                 Comenzar prueba gratuita
               </button>
-              <button className="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-3 px-8 rounded-lg transition-all duration-300">
+              <button
+                className="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-3 px-8 rounded-lg transition-all duration-300"
+                onClick={() => openForm({ name: 'Demostración' })}
+              >
                 Programar demostración
               </button>
             </div>

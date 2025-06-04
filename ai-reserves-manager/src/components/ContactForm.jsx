@@ -24,6 +24,8 @@ const ContactForm = () => {
       data.plan = selectedPlan.name;
     }
 
+    data.to_email = data.email;
+
     try {
       const result = await sendEmail(data);
       
