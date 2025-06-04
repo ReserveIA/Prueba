@@ -99,8 +99,8 @@ const Header = () => {
             initial={{ opacity: 0, scale: 0.98, y: -10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.98, y: -10 }}
-            className="md:hidden mx-2 mt-2 rounded-b-3xl shadow-2xl bg-white/70 backdrop-blur-lg border border-gray-200"
-            style={{ overflow: 'hidden' }}
+            className="md:hidden fixed top-4 left-2 right-2 z-50 rounded-3xl shadow-2xl bg-white/70 backdrop-blur-lg border border-gray-200"
+            style={{ overflow: 'hidden', maxWidth: '480px', margin: '0 auto' }}
           >
             <div className="py-6 space-y-4 px-4">
               {navItems.map((item, idx) => (
