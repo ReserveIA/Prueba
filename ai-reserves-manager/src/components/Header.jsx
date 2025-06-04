@@ -96,24 +96,26 @@ const Header = () => {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-gray-200 bg-white/95 backdrop-blur-md"
+            initial={{ opacity: 0, scale: 0.98, y: -10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.98, y: -10 }}
+            className="md:hidden mx-2 mt-2 rounded-b-3xl shadow-2xl bg-white/70 backdrop-blur-lg border border-gray-200"
+            style={{ overflow: 'hidden' }}
           >
-            <div className="py-4 space-y-4">
-              {navItems.map((item) => (
+            <div className="py-6 space-y-4 px-4">
+              {navItems.map((item, idx) => (
                 <a
                   key={item.name}
                   href={item.href}
-                  className="block px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg transition-colors"
+                  className="block px-2 py-3 text-lg text-gray-800 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-colors font-medium"
                   onClick={() => setIsMenuOpen(false)}
+                  style={{ transition: 'background 0.2s, color 0.2s' }}
                 >
                   {item.name}
                 </a>
               ))}
-              <div className="px-4 pt-4 border-t border-gray-200 space-y-2">
-                <button className="w-full text-left py-2 text-gray-700 hover:text-primary-600">
+              <div className="pt-4 border-t border-gray-100 space-y-3">
+                <button className="w-full text-left py-2 text-gray-700 hover:text-primary-600 font-medium rounded-lg transition-colors">
                   Iniciar Sesión
                 </button>
                 <button 
@@ -121,7 +123,8 @@ const Header = () => {
                     openForm();
                     setIsMenuOpen(false);
                   }}
-                  className="w-full btn-primary"
+                  className="w-full bg-primary-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:bg-primary-700 transition-colors text-lg"
+                  style={{ boxShadow: '0 4px 24px 0 rgba(80, 112, 255, 0.10)' }}
                 >
                   Comenzar prueba
                 </button>
