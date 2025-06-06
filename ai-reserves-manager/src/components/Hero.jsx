@@ -1,10 +1,28 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Play, CheckCircle, Sparkles } from 'lucide-react';
+import { ArrowRight, Play, CheckCircle, Sparkles, X } from 'lucide-react';
 import { useForm } from '../context/FormContext';
+import { useState, useEffect } from 'react';
 
 const Hero = () => {
   const { openForm } = useForm();
+  const [showDemo, setShowDemo] = useState(false);
+  const [scriptLoaded, setScriptLoaded] = useState(false);
   
+  useEffect(() => {
+    if (showDemo && !scriptLoaded) {
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/@elevenlabs/convai-widget-embed';
+      script.async = true;
+      script.onload = () => setScriptLoaded(true);
+      document.body.appendChild(script);
+
+      return () => {
+        document.body.removeChild(script);
+        setScriptLoaded(false);
+      };
+    }
+  }, [showDemo, scriptLoaded]);
+
   const features = [
     'Reservas 24/7 con IA',
     'Gestión inteligente de disponibilidad',
@@ -110,7 +128,10 @@ const Hero = () => {
                 Comienza tu prueba gratis
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
-              <button className="flex items-center space-x-2 bg-white/10 hover:bg-white/20 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 backdrop-blur-sm border border-white/20">
+              <button 
+                onClick={() => setShowDemo(true)}
+                className="flex items-center space-x-2 bg-white/10 hover:bg-white/20 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 backdrop-blur-sm border border-white/20"
+              >
                 <Play className="w-5 h-5" />
                 <span>Ver demo</span>
               </button>
@@ -199,6 +220,42 @@ const Hero = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* Demo Modal */}
+      {showDemo && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="bg-white rounded-xl shadow-2xl w-full max-w-2xl relative"
+          >
+            <button
+              onClick={() => setShowDemo(false)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 z-10"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            <div className="p-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Demo Interactiva</h3>
+              <div className="aspect-[4/3] w-full relative">
+                <div className="absolute inset-0">
+                  <elevenlabs-convai 
+                    agent-id="agent_01jwzj9strerpa60x5wmzshxvf"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      position: 'absolute',
+                      top: 0,
+                      left: 0
+                    }}
+                  ></elevenlabs-convai>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </section>
   );
 };
