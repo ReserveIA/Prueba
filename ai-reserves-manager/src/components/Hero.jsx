@@ -223,12 +223,20 @@ const Hero = () => {
 
       {/* Demo Modal */}
       {showDemo && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="bg-white rounded-xl shadow-2xl w-full max-w-2xl relative"
+            className="bg-white rounded-xl shadow-2xl w-full max-w-2xl relative flex flex-col"
+            style={{
+              width: '100%',
+              maxWidth: '600px',
+              height: '90vh',
+              maxHeight: '700px',
+              padding: 0,
+              overflow: 'hidden',
+            }}
           >
             <button
               onClick={() => setShowDemo(false)}
@@ -236,21 +244,23 @@ const Hero = () => {
             >
               <X className="w-6 h-6" />
             </button>
-            <div className="p-6">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Demo Interactiva</h3>
-              <div className="aspect-[4/3] w-full relative">
-                <div className="absolute inset-0">
+            <div className="flex flex-col h-full w-full pt-12 px-2 sm:px-6 pb-4">
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Demo Interactiva</h3>
+              <div className="flex-1 w-full overflow-auto flex items-center justify-center">
+                <div className="w-full h-full" style={{ minHeight: '320px' }}>
                   <elevenlabs-convai 
                     agent-id="agent_01jwzj9strerpa60x5wmzshxvf"
                     style={{
                       width: '100%',
                       height: '100%',
-                      position: 'absolute',
-                      top: 0,
-                      left: 0
+                      minHeight: '320px',
+                      display: 'block',
                     }}
                   ></elevenlabs-convai>
                 </div>
+              </div>
+              <div className="text-center text-xs text-gray-400 mt-2">
+                Powered by ElevenLabs Conversational AI
               </div>
             </div>
           </motion.div>
