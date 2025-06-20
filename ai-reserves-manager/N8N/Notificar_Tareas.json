@@ -1,0 +1,411 @@
+{
+  "name": "Notificar Tareas",
+  "nodes": [
+    {
+      "parameters": {
+        "triggerTimes": {
+          "item": [
+            {
+              "hour": 11
+            }
+          ]
+        }
+      },
+      "id": "84f6d952-943e-4bbe-8371-ac2dc8396b9c",
+      "name": "Revisar cada día",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [
+        -800,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "getAll",
+        "databaseId": {
+          "__rl": true,
+          "value": "209bf92b-baac-8032-9ce1-ea6d8d74b6af",
+          "mode": "list",
+          "cachedResultName": "Tareas del Equipo",
+          "cachedResultUrl": "https://www.notion.so/209bf92bbaac80329ce1ea6d8d74b6af"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "id": "7898002d-0a45-4282-a9c2-27f4ab6c96a3",
+      "name": "Buscar tareas en Notion",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 1,
+      "position": [
+        -540,
+        200
+      ],
+      "credentials": {
+        "notionApi": {
+          "id": "GgHWJCiQf1mi942T",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json['Tiempo restante'] }}",
+              "operation": "smallerEqual",
+              "value2": 3
+            }
+          ],
+          "string": [
+            {
+              "value1": "={{ $json.Estado }}",
+              "operation": "notEqual",
+              "value2": "Completada"
+            }
+          ]
+        }
+      },
+      "id": "259c50bf-acb8-4265-9acc-6cef6212f93d",
+      "name": "¿Faltan 3 días o menos?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "nico.arangor@gmail.com",
+        "toEmail": "={{ $json.Responsable[0] }}",
+        "subject": "=Tarea próxima a vencer:  {{ $json.Tarea }}",
+        "text": "=Hola,\n\nLa tarea \"{{ $json.Tarea }}\" vence en {{ $json['Tiempo restante'] }} día(s).\n\nPor favor, tómalo en cuenta.\n\nSaludos,\nEquipo de gestión ",
+        "options": {}
+      },
+      "id": "90482f69-8eca-4030-a974-8b799d390a59",
+      "name": "Enviar correo",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        220,
+        180
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "wSDS4e3Co47R5KAD",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "231c78d3-f872-43e3-a495-0fcafa1322a6",
+              "leftValue": "={{ $json.Estado }}",
+              "rightValue": "Retrasada",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -40,
+        380
+      ],
+      "id": "22cca19e-45d9-45f8-964f-378442ce1a82",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "fromEmail": "nico.arangor@gmail.com",
+        "toEmail": "={{ $json.Responsable[0] }}",
+        "subject": "=Tarea retrasada:  {{ $json.Tarea }}",
+        "text": "=Hola,\n\nLa tarea \"{{ $json.Tarea }}\" lleva {{ $json['Tiempo restante'].abs() }} día(s) retrasada.\n\nPor favor, tómalo en cuenta.\n\nSaludos,\nEquipo de gestión ",
+        "options": {}
+      },
+      "id": "696a4f0a-eda6-447a-9712-fc762151c8f7",
+      "name": "Enviar correo1",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        240,
+        380
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "wSDS4e3Co47R5KAD",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "af3e6b75-e42d-4a0a-8d86-ea649250fe53",
+              "leftValue": "={{ $json.Estado }}",
+              "rightValue": "Completada",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "0a1a4129-d0c8-4e01-9cef-937e40cff641",
+              "leftValue": "={{ $json.Prioridad }}",
+              "rightValue": "Alta",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -40,
+        40
+      ],
+      "id": "a6bc24c5-b960-458c-b0a9-5c884291edf1",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "fromEmail": "nico.arangor@gmail.com",
+        "toEmail": "={{ $json.Responsable[0] }}",
+        "subject": "=Recuerda completar {{ $json.Tarea }}",
+        "text": "=Hola,\n\nLa tarea \"{{ $json.Tarea }}\" no se ha marcado como \"Completada\" y es de \"{{ $json.Prioridad }}\" prioridad. Recuerda terminarla para dentro de {{ $json['Tiempo restante'] }} día(s).\n\nPor favor, tómalo en cuenta.\n\nSaludos,\nEquipo de gestión ",
+        "options": {}
+      },
+      "id": "7427cf7c-91f1-4708-8913-07e786e26e20",
+      "name": "Enviar correo2",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        220,
+        0
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "wSDS4e3Co47R5KAD",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.Estado }}",
+                    "rightValue": "Completada",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEquals"
+                    },
+                    "id": "d088724e-da70-4482-b40d-1a948a181a1b"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Falta"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "0db6483c-fc12-4395-a9e2-c9dea35ce2f6",
+                    "leftValue": "={{ $json['Tiempo restante'] }}",
+                    "rightValue": 3,
+                    "operator": {
+                      "type": "number",
+                      "operation": "lte"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "tiempo"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "854539f9-d545-4ce6-a811-531e52af42e7",
+                    "leftValue": "={{ $json.Estado }}",
+                    "rightValue": "Retrasada",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Retrasada"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -340,
+        200
+      ],
+      "id": "1082d2ab-3efc-4601-85a8-34fe31f80b22",
+      "name": "Switch"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Revisar cada día": {
+      "main": [
+        [
+          {
+            "node": "Buscar tareas en Notion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar tareas en Notion": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Faltan 3 días o menos?": {
+      "main": [
+        [
+          {
+            "node": "Enviar correo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Enviar correo1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Enviar correo2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "¿Faltan 3 días o menos?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e5ccdf19-52c5-4aeb-985b-5cb52fe6854a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "eb3ca1bce5ae7fa5540a065e0e1b5421116b9278928493a416f122ebdb2f81d1"
+  },
+  "id": "F35vlVhmRyzlfyvO",
+  "tags": []
+}

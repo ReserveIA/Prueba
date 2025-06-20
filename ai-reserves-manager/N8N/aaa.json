@@ -1,0 +1,136 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "twilio-reservation",
+        "responseMode": "onReceived"
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [100, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "const input = $json.Body || $json.SpeechResult || '';\nreturn { input };"
+      },
+      "name": "Parse Input",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [300, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://api.elevenlabs.io/v1/conversation",
+        "method": "POST",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={ \"input\": \"{{$json.input}}\", \"voice_id\": \"YOUR_VOICE_ID\", \"project\": \"restaurant-reservation\" }",
+        "headerParametersJson": "={ \"xi-api-key\": \"YOUR_ELEVENLABS_API_KEY\" }"
+      },
+      "name": "ElevenLabs Conversation",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "prompt": "Extract name, email, time and number of guests from this message: {{$json.response}}",
+        "temperature": 0.3
+      },
+      "name": "Extract Data with AI",
+      "type": "n8n-nodes-base.openai",
+      "typeVersion": 1,
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "sheetId": "YOUR_SHEET_ID",
+        "range": "Sheet1!A:D",
+        "options": {
+          "valueInputMode": "USER_ENTERED"
+        },
+        "valueInputMode": "USER_ENTERED",
+        "rawData": true,
+        "data": [
+          [
+            "={{$json.name}}",
+            "={{$json.email}}",
+            "={{$json.time}}",
+            "={{$json.guests}}"
+          ]
+        ]
+      },
+      "name": "Google Sheets - Save Data",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 3,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "calendar": "primary",
+        "start": "={{$json.time}}",
+        "end": "={{new Date(new Date($json.time).getTime() + 60*60*1000).toISOString()}}",
+        "summary": "=Reservation for {{$json.name}}",
+        "description": "Email: {{$json.email}}, Guests: {{$json.guests}}"
+      },
+      "name": "Google Calendar - Create Event",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 3,
+      "position": [1100, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Parse Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Input": {
+      "main": [
+        [
+          {
+            "node": "ElevenLabs Conversation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ElevenLabs Conversation": {
+      "main": [
+        [
+          {
+            "node": "Extract Data with AI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Data with AI": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets - Save Data",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Google Calendar - Create Event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

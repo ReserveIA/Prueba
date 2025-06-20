@@ -1,0 +1,112 @@
+{
+  "name": "AgendamientoCentroDeBelleza",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "agendamiento",
+        "options": {}
+      },
+      "name": "WebhookTrigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        0,
+        300
+      ],
+      "webhookId": "uuid-agendamiento-centro"
+    },
+    {
+      "parameters": {
+        "url": "https://your-ai-gateway.com/conversational",
+        "method": "POST",
+        "sendBody": true,
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "\n{\n  \"input\": $json[\"mensajeUsuario\"],\n  \"session_id\": $json[\"sessionId\"] || \"default-session\",\n  \"metadata\": {\n    \"source\": \"n8n\",\n    \"language\": \"es\"\n  }\n}\n                "
+      },
+      "name": "ElevenLabsConversacion",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        200,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "\n// Extraer datos de la respuesta de ElevenLabs\nconst respuesta = items[0].json;\n\nreturn [{\n  json: {\n    name: respuesta.customerName || \"Cliente\",\n    date: respuesta.date || \"Fecha no detectada\",\n    time: respuesta.time || \"Hora no detectada\",\n    transcription: respuesta.transcription || respuesta.input || \"\",\n  }\n}];\n                "
+      },
+      "name": "ProcesarRespuestaIA",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        400,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "\nconst { name, date, time, transcription } = items[0].json;\n\nreturn [{\n  json: {\n    values: [\n      [name, `${date} ${time}`, transcription]\n    ]\n  }\n}];\n                "
+      },
+      "name": "FormatearDatos",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        600,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "sheetId": "your-google-sheet-id",
+        "range": "Reservas!A:C",
+        "options": {},
+        "valueInputMode": "USER_ENTERED"
+      },
+      "name": "AgregarReservaGoogleSheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 1,
+      "position": [
+        800,
+        300
+      ],
+      "credentials": {
+        "googleApi": "Google Sheets Service Account"
+      }
+    }
+  ],
+  "connections": {
+    "WebhookTrigger": {
+      "main": [
+        [
+          "ElevenLabsConversacion"
+        ]
+      ]
+    },
+    "ElevenLabsConversacion": {
+      "main": [
+        [
+          "ProcesarRespuestaIA"
+        ]
+      ]
+    },
+    "ProcesarRespuestaIA": {
+      "main": [
+        [
+          "FormatearDatos"
+        ]
+      ]
+    },
+    "FormatearDatos": {
+      "main": [
+        [
+          "AgregarReservaGoogleSheets"
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "id": "1"
+}

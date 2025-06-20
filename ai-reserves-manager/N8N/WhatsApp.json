@@ -1,0 +1,524 @@
+{
+  "name": "WhatsApp",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "598481030025428",
+        "recipientPhoneNumber": "=+{{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
+        "textBody": "=*Tarea pendiente*\nNombre: {{ $('Notion2').item.json.name }}\nFecha de entrega: {{ $('Notion2').item.json.property_fecha_l_mite.start }}\nPrioridad: {{ $('Notion2').item.json.property_prioridad }}\n ",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        0
+      ],
+      "id": "f89c1c7e-8383-41a8-ba60-4dabf3912d96",
+      "name": "WhatsApp Business Cloud",
+      "webhookId": "84414ed7-b73d-453d-accc-abe9663b60e1",
+      "alwaysOutputData": false,
+      "retryOnFail": false,
+      "waitBetweenTries": 3000,
+      "credentials": {
+        "whatsAppApi": {
+          "id": "qddWX4hV7jmSaYtH",
+          "name": "WhatsApp account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "getAll",
+        "databaseId": {
+          "__rl": true,
+          "value": "209bf92b-baac-8032-9ce1-ea6d8d74b6af",
+          "mode": "list",
+          "cachedResultName": "Tareas del Equipo",
+          "cachedResultUrl": "https://www.notion.so/209bf92bbaac80329ce1ea6d8d74b6af"
+        },
+        "filterType": "manual",
+        "filters": {
+          "conditions": [
+            {
+              "key": "Estado|status",
+              "condition": "does_not_equal",
+              "statusValue": "Completada"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        620,
+        0
+      ],
+      "id": "5f888f55-929b-44c3-924c-33aadab2a43e",
+      "name": "Notion2",
+      "credentials": {
+        "notionApi": {
+          "id": "GgHWJCiQf1mi942T",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"userId\": \"{{ $json.contacts[0].wa_id === '573202837917' ? 'n.arangor@uniandes.edu.co' : \n                $json.contacts[0].wa_id === '573202061776' ? 'd.benavidess@uniandes.edu.co' :\n                $json.contacts[0].wa_id === '573187951706' ? 's.rozen@uniandes.edu.co' : '' }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        440,
+        0
+      ],
+      "id": "602a70c6-56d4-4fba-91ac-11eaf4301e19",
+      "name": "Edit Fields1",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "0b95d989-9eb9-4190-8971-5f245bc8eab8",
+              "leftValue": "={{ $json.contacts[0].wa_id }}",
+              "rightValue": "573202837917",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "5fc91af5-57f5-444f-bce8-25459e75dc56",
+              "leftValue": "={{ $json.contacts[0].wa_id }}",
+              "rightValue": "573187951706",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "2f3fc7ee-6f76-4f71-8c2e-6a0817d83be5",
+              "leftValue": "={{ $json.contacts[0].wa_id }}",
+              "rightValue": "573202061776",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "0d369187-787c-4247-9f98-61231bf6ca43",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "bcbf514c-50f0-4143-8e69-82da68a7aa64",
+              "leftValue": "={{ $json.property_responsable }}",
+              "rightValue": "={{ $('Edit Fields1').item.json.userId }}",
+              "operator": {
+                "type": "array",
+                "operation": "contains",
+                "rightType": "any"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        840,
+        0
+      ],
+      "id": "f574146a-e91b-4e76-a466-49528d37823a",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "598481030025428",
+        "recipientPhoneNumber": "=+{{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
+        "textBody": "=*Hola, soy el agente de inteligencia artificial de ReserveIA.*\n\n¿Cómo puedo ayudarte?\n ",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        440,
+        160
+      ],
+      "id": "199eff18-fdda-4f85-9c3c-b322e522d0fc",
+      "name": "WhatsApp Business Cloud1",
+      "webhookId": "84414ed7-b73d-453d-accc-abe9663b60e1",
+      "alwaysOutputData": false,
+      "retryOnFail": false,
+      "waitBetweenTries": 3000,
+      "credentials": {
+        "whatsAppApi": {
+          "id": "qddWX4hV7jmSaYtH",
+          "name": "WhatsApp account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "={{ $json.textPlain }}"
+            },
+            {
+              "content": "=El siguiente es un mensaje de respuesta de correo de un usuario a quien se le notificó una tarea. Tu objetivo es entender si el usuario solicita aplazar la tarea y cuántos días. Si lo hace, responde con este JSON:\n\n{\n  \"accion\": \"aplazar\",\n  \"dias\": 5\n}\n\nSi no se entiende o no hay una acción clara, responde con:\n\n{\n  \"accion\": \"ninguna\"\n}",
+              "role": "system"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        260,
+        420
+      ],
+      "id": "d04513a4-e152-4484-96ba-93eb8666cdc7",
+      "name": "OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "HNIPrVd8jw4cjUpL",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const openai = JSON.parse($json.message.content);\n\nif (openai.accion !== 'aplazar' || !openai.dias) {\n  return []; // No hay acción\n}\n\n// Obtener el subject del correo original\nconst subject = $('Email Trigger (IMAP)').first().json.subject;\n\n// Expresiones regulares posibles para extraer el nombre de la tarea\nconst patrones = [\n  /completar (.+)$/i,                      // Recuerda completar <Tarea>\n  /Tarea retrasada:\\s*(.+)$/i,            // Tarea retrasada: <Tarea>\n  /Tarea próxima a vencer:\\s*(.+)$/i      // Tarea próxima a vencer: <Tarea>\n];\n\nlet nombreTarea = null;\n\nfor (const regex of patrones) {\n  const match = subject.match(regex);\n  if (match) {\n    nombreTarea = match[1].trim();\n    break;\n  }\n}\n\nif (!nombreTarea) {\n  throw new Error(\"No se pudo extraer el nombre de la tarea del subject.\");\n}\n\n// Calcular nueva fecha\nconst dias = parseInt(openai.dias);\nconst nuevaFecha = new Date();\nnuevaFecha.setDate(nuevaFecha.getDate() + dias);\n\n// Formatear como \"Month Day, Year\"\nconst options = { year: 'numeric', month: 'long', day: 'numeric' };\nconst nuevaFechaFormatted = nuevaFecha.toLocaleDateString('en-US', options);\n\n// También dejamos disponible la fecha en ISO para actualizar Notion si se necesita\nconst nuevaFechaISO = nuevaFecha.toISOString().split('T')[0];\n\n// Devolvemos nombre de la tarea + ambas fechas\nreturn [\n  {\n    json: {\n      nombreTarea,\n      nuevaFecha: nuevaFechaFormatted,\n      nuevaFechaISO\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        620,
+        420
+      ],
+      "id": "b574fef3-b089-4a7a-9233-988571904532",
+      "name": "Code",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "resource": "database",
+        "databaseId": {
+          "__rl": true,
+          "value": "209bf92b-baac-8032-9ce1-ea6d8d74b6af",
+          "mode": "list",
+          "cachedResultName": "Tareas del Equipo",
+          "cachedResultUrl": "https://www.notion.so/209bf92bbaac80329ce1ea6d8d74b6af"
+        },
+        "simple": false
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        840,
+        420
+      ],
+      "id": "17b94b88-3f08-4240-9190-e3c149020f11",
+      "name": "Notion",
+      "credentials": {
+        "notionApi": {
+          "id": "GgHWJCiQf1mi942T",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "text": "={{ $('Code').item.json.nombreTarea }}",
+        "limit": 1,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        1060,
+        420
+      ],
+      "id": "5cd1fbfa-284a-4567-bb16-b24de34d55fc",
+      "name": "Notion1",
+      "credentials": {
+        "notionApi": {
+          "id": "GgHWJCiQf1mi942T",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "update",
+        "pageId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Fecha límite|date",
+              "includeTime": false,
+              "date": "={{ $('Code').item.json.nuevaFechaISO }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        1280,
+        420
+      ],
+      "id": "7a3059ff-a875-48ed-b242-ed25a9a04dbe",
+      "name": "Notion3",
+      "credentials": {
+        "notionApi": {
+          "id": "GgHWJCiQf1mi942T",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        20,
+        0
+      ],
+      "id": "199f84d7-ef21-423a-8449-7942db1baa03",
+      "name": "WhatsApp Trigger1",
+      "webhookId": "fbc895c1-9d82-474e-8c0a-fd2cb2266492",
+      "credentials": {
+        "whatsAppTriggerApi": {
+          "id": "R91tNAeiT68ufIKx",
+          "name": "WhatsApp OAuth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "598481030025428",
+        "recipientPhoneNumber": "=+{{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
+        "textBody": "=*Tarea Aplazada*\nNombre: {{ $('Notion3').item.json.name }}\nFecha de entrega: {{ $('Notion3').item.json.property_fecha_l_mite.start }}\nPrioridad: {{ $('Notion3').item.json.property_prioridad }}\n ",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        1480,
+        420
+      ],
+      "id": "fe5e7b38-b702-4065-9123-e34f494086d0",
+      "name": "WhatsApp Business Cloud2",
+      "webhookId": "84414ed7-b73d-453d-accc-abe9663b60e1",
+      "alwaysOutputData": false,
+      "retryOnFail": false,
+      "waitBetweenTries": 3000,
+      "credentials": {
+        "whatsAppApi": {
+          "id": "qddWX4hV7jmSaYtH",
+          "name": "WhatsApp account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Notion2": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Notion2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "WhatsApp Business Cloud1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp Business Cloud",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Notion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notion": {
+      "main": [
+        [
+          {
+            "node": "Notion1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notion1": {
+      "main": [
+        [
+          {
+            "node": "Notion3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notion3": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp Business Cloud2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp Trigger1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "52f6d9d9-8909-4377-a6b4-7bced3672103",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "eb3ca1bce5ae7fa5540a065e0e1b5421116b9278928493a416f122ebdb2f81d1"
+  },
+  "id": "3GQsB4YH362qZgFE",
+  "tags": []
+}
