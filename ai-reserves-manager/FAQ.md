@@ -14,46 +14,22 @@ Sí, utilizamos protocolos de seguridad estándar de la industria y todas las co
 ## Configuración y Uso
 
 ### ¿Cómo configuro el sistema por primera vez?
-1. Importe el archivo workflow.json en su instancia de n8n
-2. Configure las credenciales de Google Sheets
-3. Reemplace YOUR_GOOGLE_SHEET_ID con su ID de hoja real
-4. Active el workflow
-
-### ¿Qué formato debe tener mi Google Sheet?
-Su hoja debe tener las siguientes columnas:
-- **Name**: Nombre del cliente
-- **Availability**: Estado de disponibilidad
-- **Notes**: Notas adicionales
-
-### ¿Cómo busco información de un cliente?
-Haga una petición GET a:
-```
-https://su-instancia-n8n/webhook/search-client?name=NombreCliente
-```
+Nosotros nos encargamos personalmente de toda la implementación para que se adapte a sus necesidades.
 
 ## Funcionalidades
 
-### ¿Puedo buscar clientes por nombre parcial?
-Sí, el sistema busca coincidencias parciales. Por ejemplo, buscar "Juan" encontrará "Juan Pérez", "Juan Carlos", etc.
+### ¿Puedo utilizar diferentes canales de comunicación?
+Sí, es posible hacer la implementación para servicios de Meta (Whatsapp, Instagram, Facebook), Llamadas de voz, SMS, Slack y muchos más...
 
-### ¿Qué información retorna la búsqueda?
-Para cada cliente encontrado, retorna:
-- Nombre completo
-- Estado de disponibilidad
-- Notas asociadas
-
-### ¿Puedo obtener múltiples resultados?
-Sí, el sistema retorna un array con todos los clientes que coincidan con el nombre buscado.
+### ¿Cómo Funciona la Inteligencia Artificial en el proceso de agendamiento?
+Toda la información que suministre el cliente, sin importar el canal de comunicación, es procesada e interpretada por la Inteligencia Artificial en tiempo real como si fuera una persona humana agendando la reserva.
 
 ## Técnico
-
-### ¿Qué es n8n?
-n8n es una plataforma de automatización de flujos de trabajo que permite conectar diferentes servicios y APIs.
 
 ### ¿Necesito conocimientos técnicos para usar el sistema?
 No, una vez configurado, el sistema es completamente automático y fácil de usar.
 
-### ¿Puedo personalizar el workflow?
+### ¿Puedo personalizar el flujo de automatización?
 Sí, puede modificar el archivo JSON para agregar más funcionalidades o cambiar la lógica de búsqueda.
 
 ## Integración
@@ -65,11 +41,8 @@ Sí, puede modificar el archivo JSON para agregar más funcionalidades o cambiar
 - Sistemas de correo electrónico
 - Aplicaciones de mensajería
 
-### ¿Cómo conecto con mi base de datos existente?
-Puede agregar nodos adicionales en n8n para conectarse a su base de datos preferida.
-
-### ¿Puedo exportar datos a otros formatos?
-Sí, n8n soporta múltiples formatos de exportación como CSV, JSON, XML, etc.
+### ¿Puedo conectar mi base de datos existente?
+Sí, contamos con la capacidad de agregar nodos adicionales para conectarse a su base de datos preferida.
 
 ## Mantenimiento
 
@@ -77,21 +50,18 @@ Sí, n8n soporta múltiples formatos de exportación como CSV, JSON, XML, etc.
 La información se actualiza en tiempo real cada vez que se hace una búsqueda.
 
 ### ¿Cómo hago backup de mis datos?
-Recomendamos hacer copias de seguridad regulares de su Google Sheet y del workflow de n8n.
+Todos los datos se almacenan en la nube por lo q no será necesario.
 
 ### ¿Qué pasa si se cae el servicio?
-Tiene acceso directo a su Google Sheet como respaldo, y puede restaurar el workflow desde el archivo JSON.
+Tiene acceso directo a su Google Sheet como respaldo, en cualquier momento.
 
 ## Costos y Licencias
-
-### ¿Hay costos ocultos?
-No, solo necesita una cuenta de n8n (que puede ser gratuita para uso básico) y Google Sheets (gratuito).
 
 ### ¿Puedo usar el sistema con múltiples usuarios?
 Sí, el sistema puede manejar múltiples usuarios simultáneamente.
 
-### ¿Hay límites en el número de búsquedas?
-Los límites dependen de su plan de n8n. El plan gratuito tiene límites mensuales.
+### ¿Cuál es la diferencia entre cada plan de subscripción?
+Cada plan cuenta con funcionalidades y teconlogías distintas a partir de las necesidades de su negocio.
 
 ## Soporte
 
