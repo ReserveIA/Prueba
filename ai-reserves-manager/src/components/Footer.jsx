@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Bot, Mail, Phone, MapPin, Twitter, Linkedin, Facebook, Instagram } from 'lucide-react';
+import React from 'react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -41,6 +42,18 @@ const Footer = () => {
     { icon: Facebook, href: '#', name: 'Facebook' },
     { icon: Instagram, href: '#', name: 'Instagram' }
   ];
+
+  // Iubenda script para los enlaces legales
+  // Solo se debe cargar una vez
+  React.useEffect(() => {
+    if (!document.getElementById('iubenda-script')) {
+      const script = document.createElement('script');
+      script.id = 'iubenda-script';
+      script.type = 'text/javascript';
+      script.src = 'https://cdn.iubenda.com/iubenda.js';
+      document.body.appendChild(script);
+    }
+  }, []);
 
   return (
     <footer className="bg-gray-900 text-white">
@@ -163,7 +176,13 @@ const Footer = () => {
             >
               <h3 className="font-semibold text-white mb-4">Legal</h3>
               <ul className="space-y-2">
-                {links.legal.map((link, index) => (
+                <li>
+                  <a href="https://www.iubenda.com/privacy-policy/97079952" className="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe" title="Política de Privacidad ">Política de Privacidad</a>
+                </li>
+                <li>
+                  <a href="https://www.iubenda.com/privacy-policy/97079952/cookie-policy" className="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe" title="Política de Cookies ">Política de Cookies</a>
+                </li>
+                {links.legal.filter(link => link.name !== 'Privacy Policy' && link.name !== 'Cookie Policy').map((link, index) => (
                   <li key={index}>
                     <a 
                       href={link.href}

@@ -69,11 +69,6 @@ const Header = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <button className={`font-medium transition-colors duration-200 ${
-              isScrolled ? 'text-gray-700 hover:text-primary-600' : 'text-white hover:text-primary-200'
-            }`}>
-              Iniciar Sesión
-            </button>
             <button 
               onClick={() => openForm()}
               className="btn-primary"
@@ -115,9 +110,6 @@ const Header = () => {
                 </a>
               ))}
               <div className="pt-4 border-t border-gray-100 space-y-3">
-                <button className="w-full text-left py-2 text-gray-700 hover:text-primary-600 font-medium rounded-lg transition-colors">
-                  Iniciar Sesión
-                </button>
                 <button 
                   onClick={() => {
                     openForm();
